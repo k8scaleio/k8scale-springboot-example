@@ -1,0 +1,1 @@
+# k8scale-springboot-example
