@@ -13,7 +13,7 @@ spec:
         app: k8scale-springboot-example
     spec:
       containers:
-        - name: k8scale-io
+        - name: k8scale-springboot-example
           image: gcr.io/<PROJECT_NAME>/k8scale-springboot-example:1.0
           ports:
             - containerPort: 6200
