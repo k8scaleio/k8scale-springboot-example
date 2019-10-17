@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: k8scale-spring-boot-example-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: k8scale-springboot-example-ipaddress
+    networking.gke.io/managed-certificates: k8scale-springboot-example-certificate
+spec:
+  backend:
+    serviceName: k8scale-springboot-example-service
+    servicePort: 5200
+  tls:
+  - secretName: k8scale-springboot-example-certificate
+    hosts:
+    - www.k8scale-springboot-example.com

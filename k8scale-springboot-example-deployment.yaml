@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: k8scale-springboot-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8scale-springboot-example
+  template:
+    metadata:
+      labels:
+        app: k8scale-springboot-example
+    spec:
+      containers:
+        - name: k8scale-io
+          image: gcr.io/<PROJECT_NAME>/k8scale-springboot-example:1.0
+          ports:
+            - containerPort: 6200
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 6200
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 10
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8scale-springboot-example-service
+  labels:
+    app: k8scale-springboot-example
+spec:
+  type: NodePort
+  selector:
+    app: k8scale-springboot-example
+  ports:
+  - port: 80
+    targetPort: 6200

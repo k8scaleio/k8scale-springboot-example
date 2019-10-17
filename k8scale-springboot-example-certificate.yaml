@@ -1,0 +1,7 @@
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: k8scale-springboot-example-certificate
+spec:
+  domains:
+    - www.k8scale-springboot-example.com
